@@ -17,37 +17,47 @@ public class threadMatrix extends Thread {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int n = 4;
-        int m = 2;
-        int k = 3;
-
-        int numOfThreads = n * k;
+        
 
         int [][] matrixOne = {
-                {3,7},
-                {3,2},
-                {6,5},
-                {4,8}
+                {3,7,6,6},
+                {3,2,8,3},
+                {6,5,7,5},
+                {4,8,6,9},
+                {3,7,5,4},
+                {3,2,6,7},
+                {6,5,8,9},
+                {4,8,9,3},
+                {9,6,4,7}
         };
         int [][] matrixTwo = {
-                {3,7,2},
-                {3,2,9},
+                {3,7,2,5},
+                {3,2,9,9},
+                {3,2,9,3},
+                {3,7,2,7}
         };
+        
+        int n = matrixOne.length;
+        int m = matrixOne[0].length;
+        int k = matrixTwo[0].length;
+
+        int numOfThreads = n * k;
+        
         int [][] matrixThree = new int [n][k];
 
         Thread [][] threads = new Thread[n][k];
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n-1; i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j <= k-1; j++)
             {
                 threads[i][j]= new threadMatrix(i,j,matrixOne,matrixTwo,matrixThree);
                 threads[i][j].start();
             }
         }
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n-1; i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j <= k-1; j++)
             {
                 threads[i][j].join();
             }
