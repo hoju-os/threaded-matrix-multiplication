@@ -1,6 +1,7 @@
 public class threadMatrix extends Thread {
     private int i, j;
     private int [][] matrixOne, matrixTwo, matrixThree;
+    int product = 0;
 
     threadMatrix(int i, int j, int [][] matrixOne, int [][] matrixTwo, int [][] matrixThree)
     {
@@ -13,29 +14,30 @@ public class threadMatrix extends Thread {
 
     public void run ()
     {
-        matrixThree[i][j] = (matrixOne[i][0] * matrixTwo[0][j])+(matrixOne[i][1] * matrixTwo[1][j]);
+        //matrixThree[i][j] = (matrixOne[i][0] * matrixTwo[0][j])+(matrixOne[i][1] * matrixTwo[1][j])+(matrixOne[i][2] * matrixTwo[2][j]);
+    	for(int k = 0; k <= matrixThree[0].length; k++)
+    	{
+    		product += (matrixOne[i][k] * matrixTwo[k][j]);
+    	}
+    	matrixThree[i][j] = product;
     }
 
     public static void main(String[] args) throws InterruptedException {
         
 
-        int [][] matrixOne = {
-                {3,7,6,6},
-                {3,2,8,3},
-                {6,5,7,5},
-                {4,8,6,9},
-                {3,7,5,4},
-                {3,2,6,7},
-                {6,5,8,9},
-                {4,8,9,3},
-                {9,6,4,7}
+    	int [][] matrixOne = {
+                {3,7,6,6,6},
+                
         };
         int [][] matrixTwo = {
                 {3,7,2,5},
                 {3,2,9,9},
                 {3,2,9,3},
+                {3,7,2,7},
                 {3,7,2,7}
+                
         };
+               
         
         int n = matrixOne.length;
         int m = matrixOne[0].length;
